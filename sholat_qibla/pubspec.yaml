@@ -1,19 +1,45 @@
 name: sholat_qibla
-description: "A new Flutter project."
+description: "Aplikasi Pengingat Waktu Sholat & Arah Kiblat — offline-first, privacy by default."
 publish_to: 'none'
 version: 0.1.0
 
 environment:
-  sdk: ^3.10.4
+  sdk: '>=3.8.0 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # Lokasi (GPS)
+  geolocator: ^13.0.2
+
+  # Penyimpanan lokal preferensi
+  shared_preferences: ^2.3.3
+
+  # Notifikasi lokal (adzan, pengingat)
+  flutter_local_notifications: ^18.0.1
+
+  # Zona waktu untuk penjadwalan notifikasi
+  timezone: ^0.9.4
+
+  # State management
+  flutter_riverpod: ^2.6.1
+
+  # Sensor kompas untuk arah kiblat
+  flutter_compass: ^0.7.0
+
+  # Format tanggal/waktu + i18n
+  intl: ^0.20.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
+  mockito: ^5.4.4
+  build_runner: ^2.4.13
 
 flutter:
   uses-material-design: true
+  generate: true
