@@ -174,3 +174,112 @@ Hub → Mode Ramadhan → tampil Imsak/Sahur cutoff + hitung mundur Iftar + jadw
 - [ ] Uji keandalan notifikasi pada berbagai versi OS (Doze/background).
 - [ ] Aksesibilitas: kontras outdoor, teks besar, satu tangan, RTL/Arab.
 ```
+
+---
+
+## 8. Design System — Neo-Brutalist Prayer Companion
+
+> **name:** Neo-Brutalist Prayer Companion
+> **description:** A bold, high-contrast design system for Islamic utility apps, featuring heavy strokes, vibrant accents, and high legibility.
+> **version:** 1.1.0
+
+Sistem ini dibangun di atas prinsip **Neo-Brutalism**: kejujuran material, kontras tinggi, dan kejelasan struktural. Dirancang khusus untuk aplikasi "Waktu Sholat" agar terasa modern, mudah diakses, dan berani.
+
+### 8.1 Prinsip Inti
+
+1. **Unapologetic Hierarchy** — Gunakan ketebalan & fill kontras tinggi untuk mengarahkan mata langsung ke data terpenting (mis. sholat berikutnya).
+2. **Tactile Interactivity** — Tombol & toggle harus terasa "clickable" lewat hard shadow dan target sentuh minimal 44px.
+3. **Friendly Brutalism** — Outline tegas dilembutkan oleh palet warna (Coral, Teal, Yellow) dan tipografi Poppins agar tetap ramah.
+
+### 8.2 Color Tokens
+
+**Base Surface**
+
+| Token | Hex | Keterangan |
+| --- | --- | --- |
+| `surface` | `#fcf9f8` | Cream/Beige base |
+| `surface-dim` | `#dcd9d9` | |
+| `surface-bright` | `#fcf9f8` | |
+| `surface-container-lowest` | `#ffffff` | |
+| `surface-container-low` | `#f6f3f2` | |
+| `surface-container` | `#f1edeb` | |
+| `surface-container-high` | `#ebe7e5` | |
+| `surface-container-highest` | `#e5e1df` | |
+
+**Accents**
+
+| Peran | Token | Hex |
+| --- | --- | --- |
+| Coral | `primary` | `#ff5a3c` |
+| | `on-primary` | `#ffffff` |
+| | `primary-container` | `#ffdad4` |
+| | `on-primary-container` | `#3b0904` |
+| Teal | `secondary` | `#2fd9a8` |
+| | `on-secondary` | `#003828` |
+| | `secondary-container` | `#b3f7df` |
+| | `on-secondary-container` | `#002116` |
+| Yellow | `tertiary` | `#ffc34d` |
+| | `on-tertiary` | `#251a00` |
+| | `tertiary-container` | `#ffe0a1` |
+| | `on-tertiary-container` | `#251a00` |
+
+**Borders & Shadows**
+
+| Token | Hex | Keterangan |
+| --- | --- | --- |
+| `outline` | `#1c1b1b` | Hitam tegas untuk border & hard shadow |
+| `outline-variant` | `#49454f` | |
+
+### 8.3 Typography
+
+| Peran | Keluarga | Skala |
+| --- | --- | --- |
+| Headings | **Poppins** | `display`: font-bold tracking-tight · `headline`: font-bold · `title`: font-semibold |
+| Body | **Inter** | `body`: font-normal |
+
+### 8.4 Borders, Radius & Shadows
+
+- **Border**: width `3px`, style `solid`, color `#1c1b1b`
+- **Radius**: `20px` (kartu), `full` (tombol & toggle)
+- **Shadow hard**: `4px 4px 0px #1c1b1b`
+- **Shadow none**: `0px 0px 0px transparent`
+
+### 8.5 Component Specs
+
+**Card**
+- Base: `bg-white border-3 border-black rounded-[20px] p-4`
+- States: `default` → shadow-none · `active` → `bg-primary text-white` · `highlighted` → `shadow-[4px_4px_0px_#1c1b1b]`
+
+**Button — Primary**
+- Base: `bg-black text-white rounded-full px-6 py-3 font-bold text-center h-[44px] min-w-[44px]`
+- Interaction: `active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all`
+
+**Toggle**
+- Base: `w-[52px] h-[32px] rounded-full border-3 border-black p-1`
+- Thumb: `bg-black rounded-full transition-transform`
+- States: `on` → `bg-primary` · `off` → `bg-white`
+
+### 8.6 Spacing
+
+| Token | Nilai |
+| --- | --- |
+| `container` | `16px` |
+| `stack` | `12px` |
+| `inline` | `8px` |
+
+### 8.7 Component Documentation
+
+**Prayer Time Card** — unit fundamental aplikasi.
+- *Normal*: background putih, border hitam 3px, radius 20px.
+- *Active*: fill Coral, teks putih, hard shadow 4px — menandai "Sholat saat ini".
+- *Content*: Poppins bold untuk waktu (mis. `04:30`), Inter untuk label (mis. `Subuh`).
+
+**Navigation**
+- *Top Bar*: bersih, sticky, pemisah halus lewat border bawah.
+- *Bottom Bar*: ikon kontras tinggi dengan label jelas; state aktif memakai lingkaran coral khas.
+
+### 8.8 Accessibility
+
+- Target sentuh minimum **44px × 44px**.
+- Rasio kontras **≥ 4.5:1** untuk seluruh teks fungsional.
+- Border hitam tegas mendefinisikan batas elemen dengan jelas bagi pengguna low vision.

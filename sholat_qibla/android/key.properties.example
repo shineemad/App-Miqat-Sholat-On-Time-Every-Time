@@ -1,0 +1,17 @@
+# Template kredensial signing rilis Android untuk Miqat.
+#
+# CARA PAKAI:
+# 1. Buat keystore (sekali saja, simpan aman & jangan hilang):
+#      keytool -genkey -v -keystore ~/miqat-release.jks \
+#        -keyalg RSA -keysize 2048 -validity 10000 -alias miqat
+# 2. Salin file ini menjadi `android/key.properties`.
+# 3. Isi nilai di bawah sesuai keystore Anda.
+# 4. Jangan pernah commit key.properties maupun file .jks/.keystore
+#    (sudah diabaikan di .gitignore).
+#
+# storeFile boleh path absolut atau relatif terhadap folder android/.
+
+storePassword=GANTI_DENGAN_PASSWORD_STORE
+keyPassword=GANTI_DENGAN_PASSWORD_KEY
+keyAlias=miqat
+storeFile=/path/absolut/ke/miqat-release.jks

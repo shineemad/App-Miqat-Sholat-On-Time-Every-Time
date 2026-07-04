@@ -1,0 +1,19 @@
+ADZAN AUDIO ATTRIBUTION
+=======================
+
+File:
+- android/app/src/main/res/raw/adzan.mp3
+- ios/Runner/adzan.aiff (dipangkas 29 detik untuk batas notifikasi iOS)
+
+Karya: "The Adhan - Muslim Call to Prayer"
+Pembuat: Atcovi (pengguna Wikimedia Commons)
+Sumber: https://commons.wikimedia.org/wiki/File:The_Adhan_-_Muslim_Call_to_Prayer_-_Aaqib_Azeez.mp3
+Lisensi: Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0)
+         https://creativecommons.org/licenses/by-sa/4.0/
+
+Catatan:
+- Atribusi ditampilkan di dalam aplikasi pada Pengaturan > Tentang > "Suara adzan".
+- Versi iOS merupakan turunan (dipangkas & dikonversi ke AIFF mono) dan tetap
+  berlisensi CC BY-SA 4.0.
+- Untuk mengganti dengan rekaman adzan lain, ganti kedua file di atas dan
+  perbarui atribusi ini serta baris pada Pengaturan > Tentang.

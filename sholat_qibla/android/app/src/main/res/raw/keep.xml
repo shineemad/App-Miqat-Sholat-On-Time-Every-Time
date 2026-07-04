@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Mencegah resource shrinker menghapus audio yang dirujuk lewat nama
+     string saat runtime (RawResourceAndroidNotificationSound). -->
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:keep="@raw/adzan,@raw/alarm" />
