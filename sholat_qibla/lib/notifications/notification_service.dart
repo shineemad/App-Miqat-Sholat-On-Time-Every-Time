@@ -77,7 +77,7 @@ class NotificationService implements NotificationGateway {
         requestSoundPermission: false,
       ),
     );
-    await _plugin.initialize(settings);
+    await _plugin.initialize(settings: settings);
     _initialized = true;
   }
 
@@ -156,15 +156,13 @@ class NotificationService implements NotificationGateway {
   Future<void> schedule(ScheduledPrayerNotification notification) async {
     await initialize();
     await _plugin.zonedSchedule(
-      notification.id,
-      notification.title,
-      notification.body,
-      tz.TZDateTime.from(notification.utcTime, tz.UTC),
-      _detailsForNotification(notification),
+      id: notification.id,
+      title: notification.title,
+      body: notification.body,
+      scheduledDate: tz.TZDateTime.from(notification.utcTime, tz.UTC),
+      notificationDetails: _detailsForNotification(notification),
       // Exact alarm agar adzan tepat waktu meski device idle (Doze).
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-      uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.absoluteTime,
       payload: notification.prayer.name,
     );
   }
