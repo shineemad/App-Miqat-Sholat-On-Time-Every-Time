@@ -19,6 +19,7 @@ import '../notifications/background_refresh_coordinator.dart';
 import '../notifications/models/notification_settings.dart';
 import '../notifications/notification_service.dart';
 import '../notifications/prayer_notification_scheduler.dart';
+import '../widgets/home_widget_service.dart';
 
 /// Service locator global.
 final GetIt sl = GetIt.instance;
@@ -66,6 +67,7 @@ Future<void> configureDependencies({
   sl.registerLazySingleton<BackgroundRefreshCoordinator>(
     () => BackgroundRefreshCoordinator(prefs),
   );
+  sl.registerLazySingleton<HomeWidgetService>(() => HomeWidgetService());
 
   // --- Orang 3: Quran & Hub ---
   sl.registerLazySingleton<QuranRepository>(() => QuranRepository());

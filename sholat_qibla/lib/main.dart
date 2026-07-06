@@ -8,10 +8,12 @@ import 'app/injection.dart';
 import 'core/utils/app_logger.dart';
 import 'data/cities/city_repository.dart';
 import 'data/preferences/preferences_repository.dart';
+import 'features/today/today_controller.dart';
 import 'notifications/background_refresh_coordinator.dart';
 import 'notifications/models/notification_settings.dart';
 import 'notifications/notification_service.dart';
 import 'notifications/prayer_notification_scheduler.dart';
+import 'widgets/home_widget_service.dart';
 
 /// Titik masuk aplikasi Miqat.
 ///
@@ -40,6 +42,20 @@ Future<void> main() async {
 
   // Setup notifikasi setelah UI tampil agar tidak memperlambat cold start.
   unawaited(_setupNotifications(logger));
+
+  // Segarkan widget home screen (Android) dengan jadwal terbaru.
+  unawaited(_refreshHomeWidget(logger));
+}
+
+/// Menyegarkan widget home screen dengan ringkasan sholat hari ini.
+Future<void> _refreshHomeWidget(AppLogger logger) async {
+  try {
+    final summary = await sl<TodayController>().loadToday();
+    await sl<HomeWidgetService>().update(summary);
+  } catch (e, s) {
+    logger.error('Gagal memperbarui widget',
+        error: e, stackTrace: s, tag: 'widget');
+  }
 }
 
 /// Inisialisasi notifikasi & auto-reschedule harian untuk kota terpilih.
