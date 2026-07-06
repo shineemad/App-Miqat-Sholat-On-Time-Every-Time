@@ -65,7 +65,7 @@ class _CityPickerSheetState extends State<_CityPickerSheet> {
       expand: false,
       builder: (context, scrollController) {
         return Container(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             color: AppColors.surface,
             border: AppShapes.hardBorder,
             borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
@@ -116,7 +116,7 @@ class _CityPickerSheetState extends State<_CityPickerSheet> {
               ),
               Expanded(
                 child: _loading
-                    ? const Center(
+                    ? Center(
                         child:
                             CircularProgressIndicator(color: AppColors.primary))
                     : ListView.separated(

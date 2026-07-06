@@ -74,33 +74,40 @@ class _TasbihScreenState extends State<TasbihScreen> {
                   children: [
                     _Stat(label: 'Putaran', value: '${_state.rounds}'),
                     _Stat(
-                        label: 'Target',
-                        value: '${_state.count % _state.target}/${_state.target}'),
+                      label: 'Target',
+                      value: '${_state.count % _state.target}/${_state.target}',
+                    ),
                   ],
                 ),
               ),
               const Spacer(),
               // Penghitung besar (tap untuk menambah).
-              GestureDetector(
-                onTap: _increment,
-                child: NeoCard(
-                  active: true,
-                  highlighted: true,
-                  padding: const EdgeInsets.all(40),
-                  child: Column(
-                    children: [
-                      Text(
-                        '${_state.count}',
-                        style: AppTypography.textTheme.displayLarge!
-                            .copyWith(color: AppColors.onPrimary),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        'Ketuk untuk berdzikir',
-                        style: AppTypography.textTheme.bodyLarge!
-                            .copyWith(color: AppColors.onPrimary),
-                      ),
-                    ],
+              Semantics(
+                button: true,
+                label: 'Hitungan dzikir ${_state.count}. Ketuk untuk menambah',
+                child: GestureDetector(
+                  onTap: _increment,
+                  child: NeoCard(
+                    active: true,
+                    highlighted: true,
+                    padding: const EdgeInsets.all(40),
+                    child: Column(
+                      children: [
+                        Text(
+                          '${_state.count}',
+                          style: AppTypography.textTheme.displayLarge!.copyWith(
+                            color: AppColors.onPrimary,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Ketuk untuk berdzikir',
+                          style: AppTypography.textTheme.bodyLarge!.copyWith(
+                            color: AppColors.onPrimary,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -155,7 +162,9 @@ class _TargetChip extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
         decoration: BoxDecoration(
-          color: selected ? AppColors.primary : AppColors.surfaceContainerLowest,
+          color: selected
+              ? AppColors.primary
+              : AppColors.surfaceContainerLowest,
           border: Border.all(color: AppColors.outline, width: 2),
           borderRadius: BorderRadius.circular(100),
         ),

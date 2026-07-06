@@ -31,35 +31,41 @@ class CompassDial extends StatelessWidget {
   Widget build(BuildContext context) {
     final accent = isFacingQibla ? AppColors.secondary : AppColors.primary;
 
-    return SizedBox(
-      width: size,
-      height: size,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          // Cincin luar + mata angin (berputar mengikuti -heading).
-          Transform.rotate(
-            angle: -heading * math.pi / 180.0,
-            child: CustomPaint(
-              size: Size.square(size),
-              painter: _DialPainter(),
+    return Semantics(
+      label: isFacingQibla
+          ? 'Kompas kiblat: Anda menghadap kiblat'
+          : 'Kompas kiblat: putar ${relativeAngle.round()} derajat '
+                '${relativeAngle > 180 ? 'ke kiri' : 'ke kanan'} menuju kiblat',
+      child: SizedBox(
+        width: size,
+        height: size,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            // Cincin luar + mata angin (berputar mengikuti -heading).
+            Transform.rotate(
+              angle: -heading * math.pi / 180.0,
+              child: CustomPaint(
+                size: Size.square(size),
+                painter: _DialPainter(),
+              ),
             ),
-          ),
-          // Jarum Ka'bah (menunjuk arah kiblat relatif).
-          Transform.rotate(
-            angle: relativeAngle * math.pi / 180.0,
-            child: _QiblaNeedle(size: size, color: accent),
-          ),
-          // Pusat.
-          Container(
-            width: 18,
-            height: 18,
-            decoration: const BoxDecoration(
-              color: AppColors.outline,
-              shape: BoxShape.circle,
+            // Jarum Ka'bah (menunjuk arah kiblat relatif).
+            Transform.rotate(
+              angle: relativeAngle * math.pi / 180.0,
+              child: _QiblaNeedle(size: size, color: accent),
             ),
-          ),
-        ],
+            // Pusat.
+            Container(
+              width: 18,
+              height: 18,
+              decoration: BoxDecoration(
+                color: AppColors.outline,
+                shape: BoxShape.circle,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -88,7 +94,7 @@ class _QiblaNeedle extends StatelessWidget {
               border: AppShapes.hardBorder,
               borderRadius: BorderRadius.circular(10),
             ),
-            child: const Icon(Icons.mosque, size: 26, color: AppColors.onPrimary),
+            child: Icon(Icons.mosque, size: 26, color: AppColors.onPrimary),
           ),
           // Batang jarum.
           Container(

@@ -117,7 +117,7 @@ class _TodayScreenState extends State<TodayScreen> {
 
   Widget _buildBody() {
     if (_loading && _summary == null) {
-      return const Center(
+      return Center(
         child: CircularProgressIndicator(color: AppColors.primary),
       );
     }

@@ -58,7 +58,7 @@ class NeoToggle extends StatelessWidget {
                   child: Container(
                     width: _thumbSize,
                     height: _thumbSize,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       color: AppColors.outline,
                       shape: BoxShape.circle,
                     ),

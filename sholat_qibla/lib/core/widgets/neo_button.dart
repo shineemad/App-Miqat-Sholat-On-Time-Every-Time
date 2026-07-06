@@ -13,8 +13,8 @@ class NeoButton extends StatefulWidget {
     required this.label,
     this.onPressed,
     this.icon,
-    this.backgroundColor = AppColors.outline,
-    this.foregroundColor = AppColors.onPrimary,
+    this.backgroundColor,
+    this.foregroundColor,
     this.expanded = false,
     this.withShadow = true,
   });
@@ -22,8 +22,12 @@ class NeoButton extends StatefulWidget {
   final String label;
   final VoidCallback? onPressed;
   final IconData? icon;
-  final Color backgroundColor;
-  final Color foregroundColor;
+
+  /// Warna latar; default [AppColors.outline] (mengikuti tema aktif).
+  final Color? backgroundColor;
+
+  /// Warna teks/ikon; default [AppColors.onPrimary] (mengikuti tema aktif).
+  final Color? foregroundColor;
 
   /// Melebar memenuhi lebar induk.
   final bool expanded;
@@ -49,43 +53,50 @@ class _NeoButtonState extends State<NeoButton> {
   Widget build(BuildContext context) {
     final offset = _pressed ? 2.0 : 0.0;
     final showShadow = widget.withShadow && !_pressed && _enabled;
+    final background = widget.backgroundColor ?? AppColors.outline;
+    final foreground = widget.foregroundColor ?? AppColors.onPrimary;
 
-    return Opacity(
-      opacity: _enabled ? 1 : 0.5,
-      child: GestureDetector(
-        onTapDown: (_) => _setPressed(true),
-        onTapUp: (_) => _setPressed(false),
-        onTapCancel: () => _setPressed(false),
-        onTap: widget.onPressed,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 80),
-          curve: Curves.easeOut,
-          transform: Matrix4.translationValues(offset, offset, 0),
-          constraints: const BoxConstraints(minHeight: 44, minWidth: 44),
-          width: widget.expanded ? double.infinity : null,
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-          decoration: BoxDecoration(
-            color: widget.backgroundColor,
-            border: AppShapes.hardBorder,
-            borderRadius: BorderRadius.circular(100),
-            boxShadow: showShadow ? AppShapes.hardShadow : AppShapes.noShadow,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (widget.icon != null) ...[
-                Icon(widget.icon, size: 18, color: widget.foregroundColor),
-                const SizedBox(width: 8),
-              ],
-              Text(
-                widget.label,
-                style: AppTypography.textTheme.labelLarge!.copyWith(
-                  color: widget.foregroundColor,
-                  fontWeight: FontWeight.w700,
+    return Semantics(
+      button: true,
+      enabled: _enabled,
+      label: widget.label,
+      child: Opacity(
+        opacity: _enabled ? 1 : 0.5,
+        child: GestureDetector(
+          onTapDown: (_) => _setPressed(true),
+          onTapUp: (_) => _setPressed(false),
+          onTapCancel: () => _setPressed(false),
+          onTap: widget.onPressed,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 80),
+            curve: Curves.easeOut,
+            transform: Matrix4.translationValues(offset, offset, 0),
+            constraints: const BoxConstraints(minHeight: 44, minWidth: 44),
+            width: widget.expanded ? double.infinity : null,
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            decoration: BoxDecoration(
+              color: background,
+              border: AppShapes.hardBorder,
+              borderRadius: BorderRadius.circular(100),
+              boxShadow: showShadow ? AppShapes.hardShadow : AppShapes.noShadow,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (widget.icon != null) ...[
+                  Icon(widget.icon, size: 18, color: foreground),
+                  const SizedBox(width: 8),
+                ],
+                Text(
+                  widget.label,
+                  style: AppTypography.textTheme.labelLarge!.copyWith(
+                    color: foreground,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

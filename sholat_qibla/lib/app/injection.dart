@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../core/utils/app_logger.dart';
+import '../core/theme/theme_controller.dart';
 import '../data/cities/city_repository.dart';
 import '../data/location/location_service.dart';
 import '../data/preferences/preferences_repository.dart';
@@ -40,6 +41,7 @@ Future<void> configureDependencies({
   // --- Core ---
   sl.registerSingleton<SharedPreferences>(prefs);
   sl.registerLazySingleton<AppLogger>(() => AppLogger());
+  sl.registerLazySingleton<ThemeController>(() => ThemeController(prefs));
 
   // --- Orang 1: data & engine ---
   sl.registerSingleton<PreferencesRepository>(

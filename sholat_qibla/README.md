@@ -9,7 +9,9 @@ Aplikasi Flutter jadwal sholat & arah kiblat **offline-first** untuk Indonesia.
 - **Notifikasi adzan** tepat waktu (exact alarm, Android 12+/14+), mode adzan / senyap / getar
 - **Pengingat pra-adzan** dengan jeda yang dapat diatur
 - **Al-Qur'an** lengkap dengan bookmark
-- **42 kota Indonesia** bawaan + deteksi lokasi GPS
+- **512 kab/kota Indonesia** bawaan + deteksi lokasi GPS
+- **Tema gelap** (nyaman untuk Subuh & Isya) — terang/gelap/ikuti sistem
+- Dukungan screen reader (TalkBack/VoiceOver) pada komponen inti
 - Jadwal otomatis dipulihkan setelah restart perangkat
 
 ## Menjalankan
@@ -47,8 +49,8 @@ Tanpa `key.properties`, build rilis otomatis memakai debug key (hanya untuk peng
 | `lib/features/` | UI per fitur: today, qibla, quran, hub, settings, onboarding |
 | `lib/notifications/` | Penjadwalan adzan, exact alarm, refresh harian |
 | `lib/data/` | Repositori kota, lokasi, preferensi |
-| `assets/data/` | `cities_id.json` (42 kota), `quran.json` |
-| `tool/` | Skrip pembangun data Qur'an & logo |
+| `assets/data/` | `cities_id.json` (512 kab/kota), `quran.json` |
+| `tool/` | Skrip pembangun data kota (GeoNames), Qur'an & logo |
 
 ## Regenerasi ikon & splash
 
@@ -57,6 +59,13 @@ dart run flutter_launcher_icons
 dart run flutter_native_splash:create
 ```
 
-## Atribusi audio
+## CI
 
-Lihat [ADZAN_ATTRIBUTION.txt](ADZAN_ATTRIBUTION.txt).
+GitHub Actions (`.github/workflows/ci.yml`) menjalankan analyze + test dan
+build APK release pada setiap push/PR ke `main`.
+
+## Atribusi
+
+- Suara adzan: lihat [ADZAN_ATTRIBUTION.txt](ADZAN_ATTRIBUTION.txt).
+- Data kab/kota: berisi data dari [GeoNames](https://www.geonames.org)
+  (lisensi CC BY 4.0).

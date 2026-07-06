@@ -5,48 +5,92 @@ import 'app_typography.dart';
 
 /// ThemeData aplikasi berbasis Design System Neo-Brutalist (§8).
 ///
-/// Fokus rilis awal: tema terang (cream base, kontras tinggi untuk outdoor).
+/// Tersedia tema terang (cream base, kontras tinggi untuk outdoor) dan
+/// tema gelap (warm dark untuk pemakaian Subuh/Isya).
 abstract final class AppTheme {
-  static ThemeData get light {
-    const scheme = ColorScheme(
-      brightness: Brightness.light,
-      primary: AppColors.primary,
-      onPrimary: AppColors.onPrimary,
-      primaryContainer: AppColors.primaryContainer,
-      onPrimaryContainer: AppColors.onPrimaryContainer,
-      secondary: AppColors.secondary,
-      onSecondary: AppColors.onSecondary,
-      secondaryContainer: AppColors.secondaryContainer,
-      onSecondaryContainer: AppColors.onSecondaryContainer,
-      tertiary: AppColors.tertiary,
-      onTertiary: AppColors.onTertiary,
-      tertiaryContainer: AppColors.tertiaryContainer,
-      onTertiaryContainer: AppColors.onTertiaryContainer,
-      error: Color(0xFFBA1A1A),
-      onError: Color(0xFFFFFFFF),
-      surface: AppColors.surface,
-      onSurface: AppColors.onSurface,
-      surfaceContainerLowest: AppColors.surfaceContainerLowest,
-      surfaceContainerLow: AppColors.surfaceContainerLow,
-      surfaceContainer: AppColors.surfaceContainer,
-      surfaceContainerHigh: AppColors.surfaceContainerHigh,
-      surfaceContainerHighest: AppColors.surfaceContainerHighest,
-      surfaceDim: AppColors.surfaceDim,
-      surfaceBright: AppColors.surfaceBright,
-      onSurfaceVariant: AppColors.onSurfaceVariant,
-      outline: AppColors.outline,
-      outlineVariant: AppColors.outlineVariant,
-    );
+  static ThemeData get light => _build(
+        brightness: Brightness.light,
+        scheme: const ColorScheme(
+          brightness: Brightness.light,
+          primary: AppColorsLight.primary,
+          onPrimary: AppColorsLight.onPrimary,
+          primaryContainer: AppColorsLight.primaryContainer,
+          onPrimaryContainer: AppColorsLight.onPrimaryContainer,
+          secondary: AppColorsLight.secondary,
+          onSecondary: AppColorsLight.onSecondary,
+          secondaryContainer: AppColorsLight.secondaryContainer,
+          onSecondaryContainer: AppColorsLight.onSecondaryContainer,
+          tertiary: AppColorsLight.tertiary,
+          onTertiary: AppColorsLight.onTertiary,
+          tertiaryContainer: AppColorsLight.tertiaryContainer,
+          onTertiaryContainer: AppColorsLight.onTertiaryContainer,
+          error: AppColorsLight.error,
+          onError: AppColorsLight.onError,
+          surface: AppColorsLight.surface,
+          onSurface: AppColorsLight.onSurface,
+          surfaceContainerLowest: AppColorsLight.surfaceContainerLowest,
+          surfaceContainerLow: AppColorsLight.surfaceContainerLow,
+          surfaceContainer: AppColorsLight.surfaceContainer,
+          surfaceContainerHigh: AppColorsLight.surfaceContainerHigh,
+          surfaceContainerHighest: AppColorsLight.surfaceContainerHighest,
+          surfaceDim: AppColorsLight.surfaceDim,
+          surfaceBright: AppColorsLight.surfaceBright,
+          onSurfaceVariant: AppColorsLight.onSurfaceVariant,
+          outline: AppColorsLight.outline,
+          outlineVariant: AppColorsLight.outlineVariant,
+        ),
+      );
 
+  static ThemeData get dark => _build(
+        brightness: Brightness.dark,
+        scheme: const ColorScheme(
+          brightness: Brightness.dark,
+          primary: AppColorsDark.primary,
+          onPrimary: AppColorsDark.onPrimary,
+          primaryContainer: AppColorsDark.primaryContainer,
+          onPrimaryContainer: AppColorsDark.onPrimaryContainer,
+          secondary: AppColorsDark.secondary,
+          onSecondary: AppColorsDark.onSecondary,
+          secondaryContainer: AppColorsDark.secondaryContainer,
+          onSecondaryContainer: AppColorsDark.onSecondaryContainer,
+          tertiary: AppColorsDark.tertiary,
+          onTertiary: AppColorsDark.onTertiary,
+          tertiaryContainer: AppColorsDark.tertiaryContainer,
+          onTertiaryContainer: AppColorsDark.onTertiaryContainer,
+          error: AppColorsDark.error,
+          onError: AppColorsDark.onError,
+          surface: AppColorsDark.surface,
+          onSurface: AppColorsDark.onSurface,
+          surfaceContainerLowest: AppColorsDark.surfaceContainerLowest,
+          surfaceContainerLow: AppColorsDark.surfaceContainerLow,
+          surfaceContainer: AppColorsDark.surfaceContainer,
+          surfaceContainerHigh: AppColorsDark.surfaceContainerHigh,
+          surfaceContainerHighest: AppColorsDark.surfaceContainerHighest,
+          surfaceDim: AppColorsDark.surfaceDim,
+          surfaceBright: AppColorsDark.surfaceBright,
+          onSurfaceVariant: AppColorsDark.onSurfaceVariant,
+          outline: AppColorsDark.outline,
+          outlineVariant: AppColorsDark.outlineVariant,
+        ),
+      );
+
+  static ThemeData _build({
+    required Brightness brightness,
+    required ColorScheme scheme,
+  }) {
     return ThemeData(
       useMaterial3: true,
+      brightness: brightness,
       colorScheme: scheme,
-      scaffoldBackgroundColor: AppColors.surface,
-      textTheme: AppTypography.textTheme,
+      scaffoldBackgroundColor: scheme.surface,
+      textTheme: AppTypography.textTheme.apply(
+        bodyColor: scheme.onSurface,
+        displayColor: scheme.onSurface,
+      ),
       fontFamily: AppTypography.bodyFamily,
-      appBarTheme: const AppBarTheme(
-        backgroundColor: AppColors.surface,
-        foregroundColor: AppColors.onSurface,
+      appBarTheme: AppBarTheme(
+        backgroundColor: scheme.surface,
+        foregroundColor: scheme.onSurface,
         elevation: 0,
         scrolledUnderElevation: 0,
         centerTitle: false,
@@ -54,17 +98,17 @@ abstract final class AppTheme {
           fontFamily: AppTypography.headingFamily,
           fontWeight: FontWeight.w700,
           fontSize: 22,
-          color: AppColors.onSurface,
+          color: scheme.onSurface,
         ),
         shape: Border(
           bottom: BorderSide(
-            color: AppColors.outline,
+            color: scheme.outline,
             width: AppShapes.borderWidth,
           ),
         ),
       ),
-      splashColor: AppColors.primary.withValues(alpha: 0.12),
-      highlightColor: AppColors.primary.withValues(alpha: 0.08),
+      splashColor: scheme.primary.withValues(alpha: 0.12),
+      highlightColor: scheme.primary.withValues(alpha: 0.08),
     );
   }
 }

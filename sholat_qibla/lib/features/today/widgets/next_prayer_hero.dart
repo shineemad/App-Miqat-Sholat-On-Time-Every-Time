@@ -33,49 +33,61 @@ class NextPrayerHero extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Alhamdulillah',
-                style: AppTypography.textTheme.titleMedium),
+            Text('Alhamdulillah', style: AppTypography.textTheme.titleMedium),
             const SizedBox(height: 4),
-            Text('Semua waktu sholat hari ini telah usai',
-                style: AppTypography.textTheme.bodyMedium),
+            Text(
+              'Semua waktu sholat hari ini telah usai',
+              style: AppTypography.textTheme.bodyMedium,
+            ),
           ],
         ),
       );
     }
 
-    return NeoCard(
-      active: true,
-      highlighted: true,
-      padding: const EdgeInsets.all(24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
+    return Semantics(
+      liveRegion: true,
+      label:
+          'Sholat berikutnya ${PrayerDisplay.label(prayer!)} pukul '
+          '${PrayerDisplay.time(time!)}, '
+          '${PrayerDisplay.countdown(remaining!)} lagi',
+      child: ExcludeSemantics(
+        child: NeoCard(
+          active: true,
+          highlighted: true,
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Icon(Icons.notifications_active_outlined, size: 18),
-              const SizedBox(width: 6),
+              Row(
+                children: [
+                  const Icon(Icons.notifications_active_outlined, size: 18),
+                  const SizedBox(width: 6),
+                  Text(
+                    'Menuju ${PrayerDisplay.label(prayer!)}',
+                    style: AppTypography.textTheme.labelLarge!.copyWith(
+                      color: AppColors.onPrimary,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
               Text(
-                'Menuju ${PrayerDisplay.label(prayer!)}',
-                style: AppTypography.textTheme.labelLarge!
-                    .copyWith(color: AppColors.onPrimary),
+                PrayerDisplay.countdown(remaining!),
+                style: AppTypography.textTheme.displayMedium!.copyWith(
+                  color: AppColors.onPrimary,
+                  fontFeatures: const [], // angka tabular via Poppins bold
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                'lagi · pukul ${PrayerDisplay.time(time!)}',
+                style: AppTypography.textTheme.bodyLarge!.copyWith(
+                  color: AppColors.onPrimary,
+                ),
               ),
             ],
           ),
-          const SizedBox(height: 12),
-          Text(
-            PrayerDisplay.countdown(remaining!),
-            style: AppTypography.textTheme.displayMedium!.copyWith(
-              color: AppColors.onPrimary,
-              fontFeatures: const [], // angka tabular via Poppins bold
-            ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            'lagi · pukul ${PrayerDisplay.time(time!)}',
-            style: AppTypography.textTheme.bodyLarge!
-                .copyWith(color: AppColors.onPrimary),
-          ),
-        ],
+        ),
       ),
     );
   }

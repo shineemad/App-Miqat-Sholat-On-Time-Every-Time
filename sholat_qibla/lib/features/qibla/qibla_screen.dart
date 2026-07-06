@@ -70,7 +70,7 @@ class _QiblaScreenState extends State<QiblaScreen> {
 
   Widget _buildBody() {
     if (_loading) {
-      return const Center(
+      return Center(
         child: CircularProgressIndicator(color: AppColors.primary),
       );
     }
@@ -136,7 +136,7 @@ class _CompassSection extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 8),
-                const CircularProgressIndicator(color: AppColors.primary),
+                CircularProgressIndicator(color: AppColors.primary),
                 const SizedBox(height: 16),
                 Text('Membaca sensor kompas…',
                     style: AppTypography.textTheme.bodyMedium),

@@ -204,7 +204,7 @@ class _WelcomeStep extends StatelessWidget {
             border: AppShapes.hardBorder,
             borderRadius: AppShapes.card,
           ),
-          child: const Icon(Icons.mosque, size: 48, color: AppColors.onPrimary),
+          child: Icon(Icons.mosque, size: 48, color: AppColors.onPrimary),
         ),
         const SizedBox(height: 24),
         Text(
@@ -266,7 +266,7 @@ class _LocationStep extends StatelessWidget {
                             ? AppColors.onPrimary
                             : AppColors.onSurface)),
               ),
-              if (useGps) const Icon(Icons.check, color: AppColors.onPrimary),
+              if (useGps) Icon(Icons.check, color: AppColors.onPrimary),
             ],
           ),
         ),
@@ -338,7 +338,7 @@ class _MethodStep extends StatelessWidget {
                               : AppColors.onSurface)),
                 ),
                 if (m == method)
-                  const Icon(Icons.check, color: AppColors.onPrimary),
+                  Icon(Icons.check, color: AppColors.onPrimary),
               ],
             ),
           ),

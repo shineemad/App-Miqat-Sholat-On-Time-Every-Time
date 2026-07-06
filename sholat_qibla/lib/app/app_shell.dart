@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../core/theme/theme_controller.dart';
 import '../core/widgets/neo_bottom_nav.dart';
 import '../data/cities/city_repository.dart';
 import '../features/hub/hub_feature_registry.dart';
@@ -72,6 +73,7 @@ class _AppShellState extends State<AppShell> {
       SettingsScreen(
         controller: sl<SettingsController>(),
         cityRepository: sl<CityRepository>(),
+        themeController: sl<ThemeController>(),
       ),
     ];
 

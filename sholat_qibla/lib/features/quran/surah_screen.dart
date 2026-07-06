@@ -82,7 +82,7 @@ class _SurahScreenState extends State<SurahScreen> {
 
   Widget _buildBody() {
     if (_loading) {
-      return const Center(
+      return Center(
         child: CircularProgressIndicator(color: AppColors.primary),
       );
     }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_typography.dart';
+import '../../core/theme/theme_controller.dart';
 import '../../core/widgets/neo_card.dart';
 import '../../core/widgets/neo_toggle.dart';
 import '../../data/cities/city_repository.dart';
@@ -21,11 +22,15 @@ class SettingsScreen extends StatefulWidget {
     super.key,
     required this.controller,
     required this.cityRepository,
+    this.themeController,
     this.appVersion = '0.1.0',
   });
 
   final SettingsController controller;
   final CityRepository cityRepository;
+
+  /// Controller tema; bila null, grup Tampilan disembunyikan.
+  final ThemeController? themeController;
   final String appVersion;
 
   @override
@@ -93,7 +98,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       appBar: AppBar(title: const Text('Pengaturan')),
       body: SafeArea(
         child: _loading || _snapshot == null
-            ? const Center(
+            ? Center(
                 child: CircularProgressIndicator(color: AppColors.primary))
             : ListView(
                 padding: const EdgeInsets.all(16),
@@ -104,6 +109,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   const SizedBox(height: 20),
                   _buildLokasi(_snapshot!),
                   const SizedBox(height: 20),
+                  if (widget.themeController != null) ...[
+                    _buildTampilan(widget.themeController!),
+                    const SizedBox(height: 20),
+                  ],
                   _buildPrivasi(),
                   const SizedBox(height: 20),
                   _buildTentang(),
@@ -269,6 +278,34 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
       ],
     );
+  }
+
+  // -------------------------------------------------------------- Tampilan
+
+  Widget _buildTampilan(ThemeController theme) {
+    return _Group(
+      title: 'Tampilan',
+      children: [
+        _RowTile(
+          icon: AppColors.isDark ? Icons.dark_mode : Icons.light_mode,
+          title: 'Tema',
+          subtitle: 'Gelap nyaman untuk Subuh & Isya',
+          trailing: theme.mode.label,
+          onTap: () => _pickTheme(theme),
+        ),
+      ],
+    );
+  }
+
+  Future<void> _pickTheme(ThemeController theme) async {
+    final picked = await showModalBottomSheet<AppThemeMode>(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) => _ThemePickerSheet(current: theme.mode),
+    );
+    if (picked == null) return;
+    await theme.setMode(picked);
+    if (mounted) setState(() {});
   }
 
   // -------------------------------------------------------------- Privasi
@@ -533,7 +570,7 @@ class _MethodSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: AppColors.surface,
         border: AppShapes.hardBorder,
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
@@ -577,7 +614,83 @@ class _MethodSheet extends StatelessWidget {
                             )),
                       ),
                       if (method == current)
-                        const Icon(Icons.check, color: AppColors.onPrimary),
+                        Icon(Icons.check, color: AppColors.onPrimary),
+                    ],
+                  ),
+                ),
+              ),
+            const SizedBox(height: 12),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Modal pemilih tema (terang/gelap/sistem).
+class _ThemePickerSheet extends StatelessWidget {
+  const _ThemePickerSheet({required this.current});
+  final AppThemeMode current;
+
+  IconData _iconFor(AppThemeMode mode) => switch (mode) {
+        AppThemeMode.system => Icons.brightness_auto,
+        AppThemeMode.light => Icons.light_mode,
+        AppThemeMode.dark => Icons.dark_mode,
+      };
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        border: AppShapes.hardBorder,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      child: SafeArea(
+        top: false,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const SizedBox(height: 12),
+            Container(
+              width: 44,
+              height: 5,
+              decoration: BoxDecoration(
+                color: AppColors.outline,
+                borderRadius: BorderRadius.circular(100),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Text('Tema', style: AppTypography.textTheme.titleLarge),
+            ),
+            for (final mode in AppThemeMode.values)
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 10),
+                child: NeoCard(
+                  active: mode == current,
+                  highlighted: mode == current,
+                  onTap: () => Navigator.of(context).pop(mode),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 16, vertical: 14),
+                  child: Row(
+                    children: [
+                      Icon(_iconFor(mode),
+                          size: 20,
+                          color: mode == current
+                              ? AppColors.onPrimary
+                              : AppColors.onSurface),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(mode.label,
+                            style: AppTypography.textTheme.titleMedium!.copyWith(
+                              color: mode == current
+                                  ? AppColors.onPrimary
+                                  : AppColors.onSurface,
+                            )),
+                      ),
+                      if (mode == current)
+                        Icon(Icons.check, color: AppColors.onPrimary),
                     ],
                   ),
                 ),
@@ -598,7 +711,7 @@ class _PreAdhanSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: AppColors.surface,
         border: AppShapes.hardBorder,
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
@@ -642,7 +755,7 @@ class _PreAdhanSheet extends StatelessWidget {
                             )),
                       ),
                       if (minutes == current)
-                        const Icon(Icons.check, color: AppColors.onPrimary),
+                        Icon(Icons.check, color: AppColors.onPrimary),
                     ],
                   ),
                 ),

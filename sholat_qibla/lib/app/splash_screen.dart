@@ -93,7 +93,7 @@ class _SplashScreenState extends State<SplashScreen>
                     borderRadius: AppShapes.card,
                     boxShadow: AppShapes.hardShadow,
                   ),
-                  child: const Icon(Icons.mosque,
+                  child: Icon(Icons.mosque,
                       size: 56, color: AppColors.onPrimary),
                 ),
               ),
@@ -122,7 +122,7 @@ class _SplashScreenState extends State<SplashScreen>
             // Indikator loading kecil.
             FadeTransition(
               opacity: _textFade,
-              child: const SizedBox(
+              child: SizedBox(
                 width: 22,
                 height: 22,
                 child: CircularProgressIndicator(

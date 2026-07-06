@@ -80,7 +80,7 @@ class _QuranScreenState extends State<QuranScreen> {
       appBar: AppBar(title: const Text('Al-Quran')),
       body: SafeArea(
         child: _loading
-            ? const Center(
+            ? Center(
                 child: CircularProgressIndicator(color: AppColors.primary))
             : Column(
                 children: [

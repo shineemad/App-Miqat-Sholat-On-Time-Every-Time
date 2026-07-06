@@ -29,7 +29,7 @@ class NeoBottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: AppColors.surfaceContainerLowest,
         border: Border(
           top: BorderSide(
@@ -73,39 +73,48 @@ class _NavButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      behavior: HitTestBehavior.opaque,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          AnimatedContainer(
-            duration: const Duration(milliseconds: 140),
-            curve: Curves.easeOut,
-            width: 44,
-            height: 30,
-            decoration: BoxDecoration(
-              color: selected ? AppColors.primary : Colors.transparent,
-              border: selected
-                  ? Border.all(color: AppColors.outline, width: 2)
-                  : null,
-              borderRadius: BorderRadius.circular(100),
+    return Semantics(
+      button: true,
+      selected: selected,
+      label: 'Tab ${item.label}',
+      child: GestureDetector(
+        onTap: onTap,
+        behavior: HitTestBehavior.opaque,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 140),
+              curve: Curves.easeOut,
+              width: 44,
+              height: 30,
+              decoration: BoxDecoration(
+                color: selected ? AppColors.primary : Colors.transparent,
+                border: selected
+                    ? Border.all(color: AppColors.outline, width: 2)
+                    : null,
+                borderRadius: BorderRadius.circular(100),
+              ),
+              child: Icon(
+                item.icon,
+                size: 20,
+                color: selected
+                    ? AppColors.onPrimary
+                    : AppColors.onSurfaceVariant,
+              ),
             ),
-            child: Icon(
-              item.icon,
-              size: 20,
-              color: selected ? AppColors.onPrimary : AppColors.onSurfaceVariant,
+            const SizedBox(height: 2),
+            Text(
+              item.label,
+              style: AppTypography.textTheme.labelSmall!.copyWith(
+                color: selected
+                    ? AppColors.onSurface
+                    : AppColors.onSurfaceVariant,
+                fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
+              ),
             ),
-          ),
-          const SizedBox(height: 2),
-          Text(
-            item.label,
-            style: AppTypography.textTheme.labelSmall!.copyWith(
-              color: selected ? AppColors.onSurface : AppColors.onSurfaceVariant,
-              fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

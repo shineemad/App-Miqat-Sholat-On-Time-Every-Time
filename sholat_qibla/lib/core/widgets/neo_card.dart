@@ -16,6 +16,7 @@ class NeoCard extends StatelessWidget {
     this.padding = const EdgeInsets.all(16),
     this.onTap,
     this.backgroundColor,
+    this.semanticLabel,
   });
 
   final Widget child;
@@ -31,6 +32,9 @@ class NeoCard extends StatelessWidget {
 
   /// Override warna latar (mis. varian Teal/Yellow). Diabaikan bila [active].
   final Color? backgroundColor;
+
+  /// Label untuk screen reader (dipakai bila kartu dapat ditekan).
+  final String? semanticLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -62,10 +66,15 @@ class NeoCard extends StatelessWidget {
     );
 
     if (onTap == null) return card;
-    return GestureDetector(
-      onTap: onTap,
-      behavior: HitTestBehavior.opaque,
-      child: card,
+    return Semantics(
+      button: true,
+      label: semanticLabel,
+      selected: active,
+      child: GestureDetector(
+        onTap: onTap,
+        behavior: HitTestBehavior.opaque,
+        child: card,
+      ),
     );
   }
 }
