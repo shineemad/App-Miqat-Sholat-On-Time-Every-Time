@@ -9,12 +9,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   audioplayers: ^6.8.1
   cupertino_icons: ^1.0.8
   flutter_compass: ^0.8.1
   flutter_local_notifications: ^22.0.1
   geolocator: ^14.0.3
   get_it: ^9.2.1
+  intl: any
   shared_preferences: ^2.5.5
   timezone: ^0.11.1
 
@@ -52,6 +55,7 @@ flutter_native_splash:
 
 flutter:
   uses-material-design: true
+  generate: true
   assets:
     - assets/data/
     - assets/audio/

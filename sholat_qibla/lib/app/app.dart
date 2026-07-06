@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../core/theme/app_theme.dart';
 import '../core/theme/theme_controller.dart';
+import '../l10n/app_localizations.dart';
 import 'app_router.dart';
 import 'injection.dart';
 
@@ -44,6 +45,10 @@ class _MiqatAppState extends State<MiqatApp> with WidgetsBindingObserver {
         theme: AppTheme.light,
         darkTheme: AppTheme.dark,
         themeMode: _theme.mode.materialMode,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        // Default Bahasa Indonesia; ikuti perangkat bila didukung (EN/AR).
+        locale: const Locale('id'),
         // Selalu mulai dari Splash, apa pun URL awal browser (web). Ini
         // mencegah konflik antara initialRoute dan path URL yang bisa
         // memunculkan halaman "tidak ditemukan".

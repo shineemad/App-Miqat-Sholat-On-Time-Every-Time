@@ -15,6 +15,7 @@ import 'package:sholat_qibla/data/cities/city_repository.dart';
 import 'package:sholat_qibla/data/location/location_service.dart';
 import 'package:sholat_qibla/engine/models/lat_lng.dart';
 import 'package:sholat_qibla/features/qibla/qibla_compass_service.dart';
+import 'package:sholat_qibla/l10n/app_localizations.dart';
 
 /// AssetBundle sinkron dari isi file (asset tidak reliabel di test harness).
 class _SyncBundle extends CachingAssetBundle {
@@ -99,6 +100,9 @@ void main() {
           theme: AppTheme.light,
           darkTheme: AppTheme.dark,
           themeMode: sl<ThemeController>().mode.materialMode,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          locale: const Locale('id'),
           home: const AppShell(),
         ),
       ),

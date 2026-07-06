@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../core/theme/theme_controller.dart';
 import '../core/widgets/neo_bottom_nav.dart';
 import '../data/cities/city_repository.dart';
+import '../l10n/app_localizations.dart';
 import '../features/hub/hub_feature_registry.dart';
 import '../features/hub/hub_screen.dart';
 import '../features/hub/hijri_screen.dart';
@@ -35,11 +36,11 @@ class AppShell extends StatefulWidget {
 class _AppShellState extends State<AppShell> {
   late int _index = widget.initialIndex;
 
-  static const _items = [
-    NeoNavItem(icon: Icons.home_rounded, label: 'Beranda'),
-    NeoNavItem(icon: Icons.explore_rounded, label: 'Kiblat'),
-    NeoNavItem(icon: Icons.widgets_rounded, label: 'Hub'),
-    NeoNavItem(icon: Icons.settings_rounded, label: 'Atur'),
+  static const _icons = [
+    Icons.home_rounded,
+    Icons.explore_rounded,
+    Icons.widgets_rounded,
+    Icons.settings_rounded,
   ];
 
   void _goTo(int index) => setState(() => _index = index);
@@ -63,6 +64,13 @@ class _AppShellState extends State<AppShell> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final labels = [l10n.navHome, l10n.navQibla, l10n.navHub, l10n.navSettings];
+    final items = [
+      for (var i = 0; i < _icons.length; i++)
+        NeoNavItem(icon: _icons[i], label: labels[i]),
+    ];
+
     final tabs = [
       TodayScreen(
         controller: sl<TodayController>(),
@@ -80,7 +88,7 @@ class _AppShellState extends State<AppShell> {
     return Scaffold(
       body: IndexedStack(index: _index, children: tabs),
       bottomNavigationBar: NeoBottomNav(
-        items: _items,
+        items: items,
         currentIndex: _index,
         onTap: _goTo,
       ),

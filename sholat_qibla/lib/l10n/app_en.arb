@@ -1,0 +1,20 @@
+{
+  "@@locale": "en",
+  "appName": "Miqat",
+  "navHome": "Home",
+  "navQibla": "Qibla",
+  "navHub": "Hub",
+  "navSettings": "Settings",
+  "settingsTitle": "Settings",
+  "groupPrayer": "Prayer",
+  "groupNotification": "Notifications",
+  "groupLocation": "Location",
+  "groupDisplay": "Display",
+  "groupPrivacy": "Privacy",
+  "groupAbout": "About",
+  "themeTitle": "Theme",
+  "themeSubtitle": "Dark is comfortable for Fajr & Isha",
+  "themeSystem": "Follow System",
+  "themeLight": "Light",
+  "themeDark": "Dark"
+}

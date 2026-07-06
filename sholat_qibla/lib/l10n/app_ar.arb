@@ -1,0 +1,20 @@
+{
+  "@@locale": "ar",
+  "appName": "ميقات",
+  "navHome": "الرئيسية",
+  "navQibla": "القبلة",
+  "navHub": "المركز",
+  "navSettings": "الإعدادات",
+  "settingsTitle": "الإعدادات",
+  "groupPrayer": "الصلاة",
+  "groupNotification": "الإشعارات",
+  "groupLocation": "الموقع",
+  "groupDisplay": "المظهر",
+  "groupPrivacy": "الخصوصية",
+  "groupAbout": "حول",
+  "themeTitle": "السمة",
+  "themeSubtitle": "الوضع الداكن مريح للفجر والعشاء",
+  "themeSystem": "حسب النظام",
+  "themeLight": "فاتح",
+  "themeDark": "داكن"
+}

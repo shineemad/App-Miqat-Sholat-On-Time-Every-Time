@@ -7,6 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sholat_qibla/core/theme/app_theme.dart';
 import 'package:sholat_qibla/core/widgets/neo_toggle.dart';
+import 'package:sholat_qibla/l10n/app_localizations.dart';
 import 'package:sholat_qibla/data/cities/city_repository.dart';
 import 'package:sholat_qibla/data/preferences/preferences_repository.dart';
 import 'package:sholat_qibla/engine/models/calculation_method.dart';
@@ -56,6 +57,9 @@ void main() {
 
   Widget wrap(SettingsController c, CityRepository repo) => MaterialApp(
         theme: AppTheme.light,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        locale: const Locale('id'),
         home: SettingsScreen(controller: c, cityRepository: repo),
       );
 

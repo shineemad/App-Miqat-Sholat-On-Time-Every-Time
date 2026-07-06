@@ -7,6 +7,7 @@ import '../../core/theme/theme_controller.dart';
 import '../../core/widgets/neo_card.dart';
 import '../../core/widgets/neo_toggle.dart';
 import '../../data/cities/city_repository.dart';
+import '../../l10n/app_localizations.dart';
 import '../../engine/models/calculation_method.dart';
 import '../../engine/models/madhab.dart';
 import '../../engine/models/prayer_times.dart';
@@ -94,8 +95,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
-      appBar: AppBar(title: const Text('Pengaturan')),
+      appBar: AppBar(title: Text(l10n.settingsTitle)),
       body: SafeArea(
         child: _loading || _snapshot == null
             ? Center(
@@ -127,7 +129,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Widget _buildSholat(SettingsSnapshot s) {
     return _Group(
-      title: 'Sholat',
+      title: AppLocalizations.of(context).groupPrayer,
       children: [
         _RowTile(
           icon: Icons.calculate_outlined,
@@ -180,7 +182,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget _buildNotifikasi(SettingsSnapshot s) {
     final notif = s.notifications;
     return _Group(
-      title: 'Notifikasi',
+      title: AppLocalizations.of(context).groupNotification,
       children: [
         _RowTile(
           icon: Icons.volume_up_outlined,
@@ -247,7 +249,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Widget _buildLokasi(SettingsSnapshot s) {
     return _Group(
-      title: 'Lokasi',
+      title: AppLocalizations.of(context).groupLocation,
       children: [
         _RowTile(
           icon: Icons.gps_fixed,
@@ -282,15 +284,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   // -------------------------------------------------------------- Tampilan
 
+  /// Label mode tema terlokalisasi.
+  static String themeModeLabel(AppLocalizations l10n, AppThemeMode mode) =>
+      switch (mode) {
+        AppThemeMode.system => l10n.themeSystem,
+        AppThemeMode.light => l10n.themeLight,
+        AppThemeMode.dark => l10n.themeDark,
+      };
+
   Widget _buildTampilan(ThemeController theme) {
+    final l10n = AppLocalizations.of(context);
     return _Group(
-      title: 'Tampilan',
+      title: l10n.groupDisplay,
       children: [
         _RowTile(
           icon: AppColors.isDark ? Icons.dark_mode : Icons.light_mode,
-          title: 'Tema',
-          subtitle: 'Gelap nyaman untuk Subuh & Isya',
-          trailing: theme.mode.label,
+          title: l10n.themeTitle,
+          subtitle: l10n.themeSubtitle,
+          trailing: themeModeLabel(l10n, theme.mode),
           onTap: () => _pickTheme(theme),
         ),
       ],
@@ -312,7 +323,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Widget _buildPrivasi() {
     return _Group(
-      title: 'Privasi',
+      title: AppLocalizations.of(context).groupPrivacy,
       children: [
         NeoCard(
           backgroundColor: AppColors.secondaryContainer,
@@ -346,7 +357,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Widget _buildTentang() {
     return _Group(
-      title: 'Tentang',
+      title: AppLocalizations.of(context).groupAbout,
       children: [
         _RowTile(
           icon: Icons.info_outline,
@@ -662,7 +673,8 @@ class _ThemePickerSheet extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(16),
-              child: Text('Tema', style: AppTypography.textTheme.titleLarge),
+              child: Text(AppLocalizations.of(context).themeTitle,
+                  style: AppTypography.textTheme.titleLarge),
             ),
             for (final mode in AppThemeMode.values)
               Padding(
@@ -682,7 +694,9 @@ class _ThemePickerSheet extends StatelessWidget {
                               : AppColors.onSurface),
                       const SizedBox(width: 12),
                       Expanded(
-                        child: Text(mode.label,
+                        child: Text(
+                            _SettingsScreenState.themeModeLabel(
+                                AppLocalizations.of(context), mode),
                             style: AppTypography.textTheme.titleMedium!.copyWith(
                               color: mode == current
                                   ? AppColors.onPrimary

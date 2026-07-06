@@ -1,0 +1,23 @@
+{
+  "@@locale": "id",
+  "appName": "Miqat",
+  "@appName": {
+    "description": "Nama aplikasi"
+  },
+  "navHome": "Beranda",
+  "navQibla": "Kiblat",
+  "navHub": "Hub",
+  "navSettings": "Atur",
+  "settingsTitle": "Pengaturan",
+  "groupPrayer": "Sholat",
+  "groupNotification": "Notifikasi",
+  "groupLocation": "Lokasi",
+  "groupDisplay": "Tampilan",
+  "groupPrivacy": "Privasi",
+  "groupAbout": "Tentang",
+  "themeTitle": "Tema",
+  "themeSubtitle": "Gelap nyaman untuk Subuh & Isya",
+  "themeSystem": "Ikuti Sistem",
+  "themeLight": "Terang",
+  "themeDark": "Gelap"
+}

@@ -52,3 +52,7 @@ android/key.properties
 # Artefak APK/AAB (jangan commit binari besar)
 *.apk
 *.aab
+
+# Lokalisasi hasil generate (dibuat ulang oleh `flutter gen-l10n` / pub get).
+# File sumber .arb tetap di-commit.
+lib/l10n/app_localizations*.dart
