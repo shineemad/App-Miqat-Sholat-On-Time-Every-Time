@@ -35,6 +35,8 @@ final GetIt sl = GetIt.instance;
 Future<void> configureDependencies({
   SharedPreferences? sharedPreferences,
   LocationService? locationService,
+  CompassSource? compassSource,
+  CityRepository? cityRepository,
 }) async {
   final prefs = sharedPreferences ?? await SharedPreferences.getInstance();
 
@@ -47,7 +49,8 @@ Future<void> configureDependencies({
   sl.registerSingleton<PreferencesRepository>(
     await PreferencesRepository.create(prefs: prefs),
   );
-  sl.registerLazySingleton<CityRepository>(() => CityRepository());
+  sl.registerLazySingleton<CityRepository>(
+      () => cityRepository ?? CityRepository());
   sl.registerLazySingleton<LocationService>(
     () => locationService ?? const GeolocatorLocationService(),
   );
@@ -91,7 +94,7 @@ Future<void> configureDependencies({
       locationService: sl<LocationService>(),
       cityRepository: sl<CityRepository>(),
       preferences: sl<PreferencesRepository>(),
-      compassSource: const FlutterCompassSource(),
+      compassSource: compassSource ?? const FlutterCompassSource(),
     ),
   );
   sl.registerFactory<OnboardingController>(
