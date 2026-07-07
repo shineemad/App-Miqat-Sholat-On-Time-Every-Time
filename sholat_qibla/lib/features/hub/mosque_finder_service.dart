@@ -1,7 +1,13 @@
+import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
+
+import 'package:http/http.dart' as http;
 
 import '../../engine/models/lat_lng.dart';
+
+/// true saat dikompilasi untuk web (pengganti kIsWeb tanpa dependensi
+/// Flutter, agar service tetap pure Dart & dapat diuji via `dart run`).
+const bool _isWeb = bool.fromEnvironment('dart.library.js_interop');
 
 /// Satu masjid hasil pencarian.
 class Mosque {
@@ -22,7 +28,7 @@ class Mosque {
 abstract interface class MosqueDataSource {
   /// Mencari masjid dalam radius [radiusMeters] dari [center].
   ///
-  /// Melempar [MosqueLookupException] bila jaringan/served gagal.
+  /// Melempar [MosqueLookupException] bila jaringan/server gagal.
   Future<List<Mosque>> findNearby(LatLng center, {int radiusMeters});
 }
 
@@ -37,20 +43,27 @@ class MosqueLookupException implements Exception {
 
 /// Implementasi [MosqueDataSource] dengan Overpass API (OpenStreetMap).
 ///
+/// Memakai package:http agar berjalan di semua platform (fetch di web,
+/// dart:io di Android/iOS/desktop). Overpass mengizinkan CORS
+/// (Access-Control-Allow-Origin: *) sehingga web juga didukung.
+///
 /// Gratis & tanpa API key. Fitur ini satu-satunya yang online — dipanggil
 /// hanya saat pengguna membuka Pencari Masjid (opt-in), tanpa mengirim
 /// data apa pun selain koordinat area pencarian.
 class OverpassMosqueDataSource implements MosqueDataSource {
-  OverpassMosqueDataSource({HttpClient? client})
-      : _client = (client ?? HttpClient())
-          ..connectionTimeout = const Duration(seconds: 10)
-          // Kebijakan Overpass/OSM: sertakan User-Agent deskriptif
-          // (tanpa ini server membalas 406 Not Acceptable).
-          ..userAgent = 'Miqat-PrayerApp/1.0 (offline-first prayer app)';
+  OverpassMosqueDataSource({http.Client? client})
+      : _client = client ?? http.Client();
 
-  static const _endpoint = 'https://overpass-api.de/api/interpreter';
+  /// Endpoint utama + mirror (dicoba berurutan bila gagal/timeout).
+  static const List<String> endpoints = [
+    'https://overpass-api.de/api/interpreter',
+    'https://overpass.kumi.systems/api/interpreter',
+  ];
 
-  final HttpClient _client;
+  /// Batas waktu per endpoint.
+  static const Duration requestTimeout = Duration(seconds: 15);
+
+  final http.Client _client;
 
   @override
   Future<List<Mosque>> findNearby(LatLng center,
@@ -62,22 +75,42 @@ class OverpassMosqueDataSource implements MosqueDataSource {
         '(around:$radiusMeters,${center.latitude},${center.longitude}););'
         'out center 40;';
 
-    try {
-      final request = await _client.postUrl(Uri.parse(_endpoint));
-      request.headers.contentType =
-          ContentType('application', 'x-www-form-urlencoded', charset: 'utf-8');
-      request.write('data=${Uri.encodeQueryComponent(query)}');
-      final response = await request.close();
-      if (response.statusCode != 200) {
-        throw MosqueLookupException('Server ${response.statusCode}');
+    Object? lastError;
+    for (final endpoint in endpoints) {
+      try {
+        final response = await _client
+            .post(
+              Uri.parse(endpoint),
+              headers: {
+                'Content-Type':
+                    'application/x-www-form-urlencoded; charset=utf-8',
+                // Kebijakan OSM: User-Agent deskriptif (tanpa ini 406).
+                // Di web, browser mengirim UA-nya sendiri (header ini
+                // terlarang untuk di-set dari halaman).
+                if (!_isWeb)
+                  'User-Agent':
+                      'Miqat-PrayerApp/1.0 (offline-first prayer app)',
+              },
+              body: 'data=${Uri.encodeQueryComponent(query)}',
+            )
+            .timeout(requestTimeout);
+
+        if (response.statusCode != 200) {
+          lastError = MosqueLookupException('Server ${response.statusCode}');
+          continue; // coba mirror berikutnya
+        }
+        return parseOverpass(utf8.decode(response.bodyBytes), center);
+      } on TimeoutException {
+        lastError = const MosqueLookupException('Waktu koneksi habis');
+      } on MosqueLookupException catch (e) {
+        lastError = e;
+      } catch (e) {
+        lastError = MosqueLookupException('Tidak dapat terhubung: $e');
       }
-      final body = await response.transform(utf8.decoder).join();
-      return parseOverpass(body, center);
-    } on MosqueLookupException {
-      rethrow;
-    } catch (e) {
-      throw MosqueLookupException('Tidak dapat terhubung: $e');
     }
+    throw lastError is MosqueLookupException
+        ? lastError
+        : MosqueLookupException('$lastError');
   }
 
   /// Parse respons JSON Overpass menjadi daftar [Mosque] terurut jarak.
