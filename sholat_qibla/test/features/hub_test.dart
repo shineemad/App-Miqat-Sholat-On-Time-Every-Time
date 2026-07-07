@@ -124,10 +124,13 @@ void main() {
   group('HubFeatureRegistry', () {
     test('fitur tersedia vs segera hadir', () {
       final available = HubFeatureRegistry.available.map((f) => f.id);
-      expect(available, containsAll(['tasbih', 'quran', 'hijri']));
+      expect(
+          available,
+          containsAll(
+              ['tasbih', 'quran', 'hijri', 'mosque_finder', 'ramadhan_mode']));
 
       final comingSoon = HubFeatureRegistry.comingSoon.map((f) => f.id);
-      expect(comingSoon, containsAll(['mosque_finder', 'ramadhan_mode']));
+      expect(comingSoon, isEmpty);
     });
 
     test('semua fitur punya rute unik', () {
@@ -137,7 +140,7 @@ void main() {
 
     test('byId', () {
       expect(HubFeatureRegistry.byId('tasbih')!.available, isTrue);
-      expect(HubFeatureRegistry.byId('mosque_finder')!.available, isFalse);
+      expect(HubFeatureRegistry.byId('mosque_finder')!.available, isTrue);
       expect(HubFeatureRegistry.byId('tidak_ada'), isNull);
     });
   });

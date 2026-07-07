@@ -55,14 +55,14 @@ abstract final class HubFeatureRegistry {
       title: 'Pencari Masjid',
       description: 'Temukan masjid terdekat di sekitar Anda',
       route: '/hub/mosque-finder',
-      available: false,
+      available: true,
     ),
     HubFeature(
       id: 'ramadhan_mode',
       title: 'Mode Ramadhan',
       description: 'Jadwal imsak, sahur, dan buka puasa',
       route: '/hub/ramadhan',
-      available: false,
+      available: true,
     ),
   ];
 

@@ -7,6 +7,10 @@ import '../l10n/app_localizations.dart';
 import '../features/hub/hub_feature_registry.dart';
 import '../features/hub/hub_screen.dart';
 import '../features/hub/hijri_screen.dart';
+import '../features/hub/mosque_finder_controller.dart';
+import '../features/hub/mosque_finder_screen.dart';
+import '../features/hub/ramadhan_controller.dart';
+import '../features/hub/ramadhan_screen.dart';
 import '../features/hub/tasbih_counter.dart';
 import '../features/hub/tasbih_screen.dart';
 import '../features/qibla/qibla_controller.dart';
@@ -58,6 +62,16 @@ class _AppShellState extends State<AppShell> {
       case 'quran':
         Navigator.of(context).push(MaterialPageRoute(
           builder: (_) => QuranScreen(controller: sl<QuranController>()),
+        ));
+      case 'ramadhan_mode':
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (_) =>
+              RamadhanScreen(controller: sl<RamadhanController>()),
+        ));
+      case 'mosque_finder':
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (_) => MosqueFinderScreen(
+              controller: sl<MosqueFinderController>()),
         ));
     }
   }

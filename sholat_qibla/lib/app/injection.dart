@@ -4,8 +4,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../core/utils/app_logger.dart';
 import '../core/theme/theme_controller.dart';
 import '../data/cities/city_repository.dart';
+import '../data/location/location_resolver.dart';
 import '../data/location/location_service.dart';
 import '../data/preferences/preferences_repository.dart';
+import '../features/hub/mosque_finder_controller.dart';
+import '../features/hub/mosque_finder_service.dart';
+import '../features/hub/ramadhan_controller.dart';
 import '../features/hub/tasbih_counter.dart';
 import '../features/onboarding/onboarding_controller.dart';
 import '../features/qibla/qibla_compass_service.dart';
@@ -92,6 +96,33 @@ Future<void> configureDependencies({
     QuranBookmarkRepository(prefs),
   );
   sl.registerFactory<TasbihCounter>(() => TasbihCounter(prefs));
+
+  // --- Fitur Hub v2: Mode Ramadhan & Pencari Masjid ---
+  sl.registerFactory<RamadhanController>(
+    () => RamadhanController(
+      resolver: LocationResolver(
+        locationService: sl<LocationService>(),
+        cityRepository: sl<CityRepository>(),
+        preferences: sl<PreferencesRepository>(),
+      ),
+      preferences: sl<PreferencesRepository>(),
+    ),
+  );
+  sl.registerLazySingleton<MosqueDataSource>(
+    () => OverpassMosqueDataSource(),
+  );
+  sl.registerFactory<MosqueFinderController>(
+    () => MosqueFinderController(
+      dataSource: sl<MosqueDataSource>(),
+      locationService: sl<LocationService>(),
+      resolver: LocationResolver(
+        locationService: sl<LocationService>(),
+        cityRepository: sl<CityRepository>(),
+        preferences: sl<PreferencesRepository>(),
+      ),
+      preferences: sl<PreferencesRepository>(),
+    ),
+  );
 
   sl.registerFactory<QuranController>(
     () => QuranController(
