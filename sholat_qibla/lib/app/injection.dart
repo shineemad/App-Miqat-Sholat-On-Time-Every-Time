@@ -19,6 +19,7 @@ import '../notifications/background_refresh_coordinator.dart';
 import '../notifications/models/notification_settings.dart';
 import '../notifications/notification_service.dart';
 import '../notifications/prayer_notification_scheduler.dart';
+import '../notifications/schedule_refresher.dart';
 import '../widgets/home_widget_service.dart';
 
 /// Service locator global.
@@ -68,6 +69,22 @@ Future<void> configureDependencies({
     () => BackgroundRefreshCoordinator(prefs),
   );
   sl.registerLazySingleton<HomeWidgetService>(() => HomeWidgetService());
+  sl.registerLazySingleton<ScheduleRefresher>(
+    () => ScheduleRefresher(
+      preferences: sl<PreferencesRepository>(),
+      cityRepository: sl<CityRepository>(),
+      notificationSettings: sl<NotificationSettingsRepository>(),
+      scheduler: sl<PrayerNotificationScheduler>(),
+      coordinator: sl<BackgroundRefreshCoordinator>(),
+      todayController: TodayController(
+        locationService: sl<LocationService>(),
+        cityRepository: sl<CityRepository>(),
+        preferences: sl<PreferencesRepository>(),
+      ),
+      homeWidget: sl<HomeWidgetService>(),
+      logger: sl<AppLogger>(),
+    ),
+  );
 
   // --- Orang 3: Quran & Hub ---
   sl.registerLazySingleton<QuranRepository>(() => QuranRepository());
@@ -108,6 +125,7 @@ Future<void> configureDependencies({
       notificationSettings: sl<NotificationSettingsRepository>(),
       cityRepository: sl<CityRepository>(),
       refreshCoordinator: sl<BackgroundRefreshCoordinator>(),
+      onScheduleChanged: () => sl<ScheduleRefresher>().applySettingsChange(),
     ),
   );
 }

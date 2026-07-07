@@ -38,6 +38,7 @@ class SettingsController {
     required NotificationSettingsRepository notificationSettings,
     required CityRepository cityRepository,
     required BackgroundRefreshCoordinator refreshCoordinator,
+    this.onScheduleChanged,
   })  : _prefs = preferences,
         _notif = notificationSettings,
         _cities = cityRepository,
@@ -47,6 +48,11 @@ class SettingsController {
   final NotificationSettingsRepository _notif;
   final CityRepository _cities;
   final BackgroundRefreshCoordinator _refresh;
+
+  /// Dipanggil setelah perubahan yang memengaruhi jadwal (kota, metode,
+  /// madzhab, offset, notifikasi) agar notifikasi & widget langsung
+  /// diperbarui. Opsional agar mudah diuji.
+  final Future<void> Function()? onScheduleChanged;
 
   /// Memuat snapshot pengaturan saat ini.
   Future<SettingsSnapshot> load() async {
@@ -127,8 +133,12 @@ class SettingsController {
     await _invalidate();
   }
 
-  /// Menandai jadwal notifikasi perlu disusun ulang.
-  Future<void> _invalidate() => _refresh.invalidate();
+  /// Menandai jadwal notifikasi perlu disusun ulang dan menerapkannya
+  /// segera (bila callback tersedia).
+  Future<void> _invalidate() async {
+    await _refresh.invalidate();
+    await onScheduleChanged?.call();
+  }
 
   /// Mereset status onboarding agar alur perkenalan tampil lagi.
   Future<void> resetOnboarding() => _prefs.resetOnboarding();

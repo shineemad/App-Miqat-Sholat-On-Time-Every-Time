@@ -25,9 +25,22 @@ class MiqatWidgetProvider : AppWidgetProvider() {
 
             val nextName = prefs.getString("next_name", "—") ?: "—"
             val nextTime = prefs.getString("next_time", "") ?: ""
-            val countdown = prefs.getString("next_countdown", "") ?: ""
             val cityName = prefs.getString("city_name", "") ?: ""
             val timesLine = prefs.getString("times_line", "") ?: ""
+
+            // Hitung ulang sisa waktu dari epoch agar countdown tidak basi
+            // antar refresh periodik (data string hanya fallback).
+            // Dart int bisa tersimpan sebagai Int atau Long — baca aman.
+            val nextEpoch = when (val v = prefs.all["next_epoch"]) {
+                is Long -> v
+                is Int -> v.toLong()
+                else -> 0L
+            }
+            val countdown = if (nextEpoch > System.currentTimeMillis()) {
+                formatRemaining(nextEpoch - System.currentTimeMillis())
+            } else {
+                prefs.getString("next_countdown", "") ?: ""
+            }
 
             views.setTextViewText(R.id.widget_next_name, nextName)
             views.setTextViewText(R.id.widget_next_time, nextTime)
@@ -50,5 +63,14 @@ class MiqatWidgetProvider : AppWidgetProvider() {
 
             appWidgetManager.updateAppWidget(widgetId, views)
         }
+    }
+
+    /** Format sisa waktu ala aplikasi: "1j 23m" atau "12m". */
+    private fun formatRemaining(millis: Long): String {
+        val totalMinutes = millis / 60000
+        val hours = totalMinutes / 60
+        val minutes = totalMinutes % 60
+        return if (hours > 0) "${hours}j ${minutes.toString().padStart(2, '0')}m"
+        else "${minutes}m"
     }
 }

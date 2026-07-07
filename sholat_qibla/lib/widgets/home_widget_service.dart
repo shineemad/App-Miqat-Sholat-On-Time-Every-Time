@@ -49,11 +49,16 @@ class HomeWidgetService {
           'next_time', PrayerDisplay.time(summary.nextPrayerTime!));
       await HomeWidget.saveWidgetData<String>(
           'next_countdown', PrayerDisplay.countdown(remaining));
+      // Epoch millis agar widget dapat menghitung ulang sisa waktu di sisi
+      // native pada setiap refresh periodik (countdown tidak basi).
+      await HomeWidget.saveWidgetData<int>('next_epoch',
+          summary.nextPrayerTime!.millisecondsSinceEpoch);
     } else {
-      await HomeWidget.saveWidgetData<String>('next_name', '—');
+      await HomeWidget.saveWidgetData<String>('next_name', '\u2014');
       await HomeWidget.saveWidgetData<String>('next_time', '');
       await HomeWidget.saveWidgetData<String>(
           'next_countdown', 'Selesai hari ini');
+      await HomeWidget.saveWidgetData<int>('next_epoch', 0);
     }
 
     // Ringkasan 5 waktu "Subuh 04:41 · Dzuhur 11:56 · ..."

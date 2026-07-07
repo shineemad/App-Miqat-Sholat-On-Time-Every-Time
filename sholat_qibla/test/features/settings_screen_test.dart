@@ -88,6 +88,27 @@ void main() {
     expect(find.text('Kemenag RI'), findsOneWidget);
   });
 
+  test('perubahan pengaturan memicu onScheduleChanged', () async {
+    SharedPreferences.setMockInitialValues({});
+    final prefs = await SharedPreferences.getInstance();
+    final prefRepo = await PreferencesRepository.create(prefs: prefs);
+    var called = 0;
+    final controller = SettingsController(
+      preferences: prefRepo,
+      notificationSettings: NotificationSettingsRepository(prefs),
+      cityRepository: CityRepository(
+          bundle: _SyncBundle({'assets/data/cities_id.json': citiesJson})),
+      refreshCoordinator: BackgroundRefreshCoordinator(prefs),
+      onScheduleChanged: () async => called++,
+    );
+
+    await controller.setMethod(CalculationMethod.mwl);
+    await controller.selectCity('bandung');
+    await controller.setMadhab(Madhab.hanafi);
+
+    expect(called, 3);
+  });
+
   testWidgets('ubah madzhab tersimpan', (tester) async {
     tester.view.physicalSize = const Size(1200, 4000);
     tester.view.devicePixelRatio = 1.0;
