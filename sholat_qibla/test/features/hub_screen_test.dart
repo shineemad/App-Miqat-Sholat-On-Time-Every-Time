@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sholat_qibla/core/theme/app_theme.dart';
-import 'package:sholat_qibla/features/hub/hijri_screen.dart';
-import 'package:sholat_qibla/features/hub/hub_feature_registry.dart';
-import 'package:sholat_qibla/features/hub/hub_screen.dart';
-import 'package:sholat_qibla/features/hub/tasbih_counter.dart';
-import 'package:sholat_qibla/features/hub/tasbih_screen.dart';
+import 'package:mu_qibla/core/theme/app_theme.dart';
+import 'package:mu_qibla/features/hub/hijri_screen.dart';
+import 'package:mu_qibla/features/hub/hub_feature_registry.dart';
+import 'package:mu_qibla/features/hub/hub_screen.dart';
+import 'package:mu_qibla/features/hub/tasbih_counter.dart';
+import 'package:mu_qibla/features/hub/tasbih_screen.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

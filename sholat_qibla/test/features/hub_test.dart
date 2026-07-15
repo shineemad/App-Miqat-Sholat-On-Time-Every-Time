@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sholat_qibla/features/hub/hijri_calendar.dart';
-import 'package:sholat_qibla/features/hub/hub_feature_registry.dart';
-import 'package:sholat_qibla/features/hub/tasbih_counter.dart';
+import 'package:mu_qibla/features/hub/hijri_calendar.dart';
+import 'package:mu_qibla/features/hub/hub_feature_registry.dart';
+import 'package:mu_qibla/features/hub/tasbih_counter.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

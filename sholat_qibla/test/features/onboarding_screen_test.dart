@@ -5,15 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sholat_qibla/core/theme/app_theme.dart';
-import 'package:sholat_qibla/data/cities/city_repository.dart';
-import 'package:sholat_qibla/data/preferences/preferences_repository.dart';
-import 'package:sholat_qibla/engine/models/calculation_method.dart';
-import 'package:sholat_qibla/engine/models/madhab.dart';
-import 'package:sholat_qibla/engine/models/prayer_times.dart';
-import 'package:sholat_qibla/notifications/models/notification_settings.dart';
-import 'package:sholat_qibla/features/onboarding/onboarding_controller.dart';
-import 'package:sholat_qibla/features/onboarding/onboarding_screen.dart';
+import 'package:mu_qibla/core/theme/app_theme.dart';
+import 'package:mu_qibla/data/cities/city_repository.dart';
+import 'package:mu_qibla/data/preferences/preferences_repository.dart';
+import 'package:mu_qibla/engine/models/calculation_method.dart';
+import 'package:mu_qibla/engine/models/madhab.dart';
+import 'package:mu_qibla/engine/models/prayer_times.dart';
+import 'package:mu_qibla/notifications/models/notification_settings.dart';
+import 'package:mu_qibla/features/onboarding/onboarding_controller.dart';
+import 'package:mu_qibla/features/onboarding/onboarding_screen.dart';
 
 class _SyncBundle extends CachingAssetBundle {
   _SyncBundle(this._contents);
@@ -64,7 +64,7 @@ void main() {
     await tester.pump();
 
     // Langkah 1: Welcome.
-    expect(find.text('Miqat'), findsOneWidget);
+    expect(find.text('MU-Qibla'), findsOneWidget);
     await tester.tap(find.text('Lanjut'));
     await tester.pumpAndSettle();
 

@@ -12,10 +12,10 @@ class HomeWidgetService {
   HomeWidgetService();
 
   /// Nama provider widget di sisi Android (harus cocok dengan Kotlin).
-  static const String _androidName = 'MiqatWidgetProvider';
+  static const String _androidName = 'MuQiblaWidgetProvider';
 
   /// Grup App Group iOS (belum dipakai; widget iOS menyusul).
-  static const String _appGroupId = 'group.com.sholatqibla.miqat';
+  static const String _appGroupId = 'group.com.muqibla.mu_qibla';
 
   static const _urutan = [
     Prayer.fajr,
@@ -71,7 +71,7 @@ class HomeWidgetService {
 
     await HomeWidget.updateWidget(
       androidName: _androidName,
-      iOSName: 'MiqatWidget',
+      iOSName: 'MuQiblaWidget',
     );
   }
 }

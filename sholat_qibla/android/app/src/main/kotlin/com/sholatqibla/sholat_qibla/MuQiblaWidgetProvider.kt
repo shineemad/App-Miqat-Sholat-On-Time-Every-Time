@@ -1,4 +1,4 @@
-package com.sholatqibla.sholat_qibla
+package com.muqibla.mu_qibla
 
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
@@ -8,11 +8,11 @@ import android.widget.RemoteViews
 import es.antonborri.home_widget.HomeWidgetPlugin
 
 /**
- * Widget home screen Miqat: menampilkan sholat berikutnya + hitung mundur,
+ * Widget home screen MU-Qibla: menampilkan sholat berikutnya + hitung mundur,
  * lengkap dengan ringkasan 5 waktu. Data diisi dari Flutter lewat
  * home_widget (SharedPreferences native), dibaca via HomeWidgetPlugin.
  */
-class MiqatWidgetProvider : AppWidgetProvider() {
+class MuQiblaWidgetProvider : AppWidgetProvider() {
 
     override fun onUpdate(
         context: Context,
@@ -21,7 +21,7 @@ class MiqatWidgetProvider : AppWidgetProvider() {
     ) {
         val prefs = HomeWidgetPlugin.getData(context)
         for (widgetId in appWidgetIds) {
-            val views = RemoteViews(context.packageName, R.layout.miqat_widget)
+            val views = RemoteViews(context.packageName, R.layout.mu_qibla_widget)
 
             val nextName = prefs.getString("next_name", "—") ?: "—"
             val nextTime = prefs.getString("next_time", "") ?: ""

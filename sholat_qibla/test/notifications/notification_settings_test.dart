@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sholat_qibla/engine/models/prayer_times.dart';
-import 'package:sholat_qibla/notifications/background_refresh_coordinator.dart';
-import 'package:sholat_qibla/notifications/models/notification_settings.dart';
+import 'package:mu_qibla/engine/models/prayer_times.dart';
+import 'package:mu_qibla/notifications/background_refresh_coordinator.dart';
+import 'package:mu_qibla/notifications/models/notification_settings.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

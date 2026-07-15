@@ -89,7 +89,7 @@ class OverpassMosqueDataSource implements MosqueDataSource {
                 // terlarang untuk di-set dari halaman).
                 if (!_isWeb)
                   'User-Agent':
-                      'Miqat-PrayerApp/1.0 (offline-first prayer app)',
+                      'MU-Qibla-PrayerApp/1.0 (offline-first prayer app)',
               },
               body: 'data=${Uri.encodeQueryComponent(query)}',
             )

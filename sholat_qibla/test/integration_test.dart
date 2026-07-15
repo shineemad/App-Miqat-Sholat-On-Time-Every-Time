@@ -1,15 +1,15 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sholat_qibla/app/injection.dart';
-import 'package:sholat_qibla/data/cities/city_repository.dart';
-import 'package:sholat_qibla/data/location/location_service.dart';
-import 'package:sholat_qibla/data/preferences/preferences_repository.dart';
-import 'package:sholat_qibla/engine/models/calculation_method.dart';
-import 'package:sholat_qibla/engine/models/lat_lng.dart';
-import 'package:sholat_qibla/engine/models/madhab.dart';
-import 'package:sholat_qibla/features/onboarding/onboarding_controller.dart';
-import 'package:sholat_qibla/features/today/today_controller.dart';
-import 'package:sholat_qibla/features/quran/quran_repository.dart';
+import 'package:mu_qibla/app/injection.dart';
+import 'package:mu_qibla/data/cities/city_repository.dart';
+import 'package:mu_qibla/data/location/location_service.dart';
+import 'package:mu_qibla/data/preferences/preferences_repository.dart';
+import 'package:mu_qibla/engine/models/calculation_method.dart';
+import 'package:mu_qibla/engine/models/lat_lng.dart';
+import 'package:mu_qibla/engine/models/madhab.dart';
+import 'package:mu_qibla/features/onboarding/onboarding_controller.dart';
+import 'package:mu_qibla/features/today/today_controller.dart';
+import 'package:mu_qibla/features/quran/quran_repository.dart';
 
 /// Location service palsu untuk integration test (tanpa GPS asli).
 class _FakeLocationService implements LocationService {

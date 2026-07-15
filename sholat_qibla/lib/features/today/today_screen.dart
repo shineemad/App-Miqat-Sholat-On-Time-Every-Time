@@ -95,7 +95,7 @@ class _TodayScreenState extends State<TodayScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Miqat'),
+        title: const Text('MU-Qibla'),
         actions: [
           IconButton(
             onPressed: widget.onOpenQibla,

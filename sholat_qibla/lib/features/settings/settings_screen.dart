@@ -361,7 +361,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       children: [
         _RowTile(
           icon: Icons.info_outline,
-          title: 'Miqat — Sholat On Time',
+          title: 'MU-Qibla — Sholat On Time',
           trailing: 'v${widget.appVersion}',
         ),
         const _Divider(),

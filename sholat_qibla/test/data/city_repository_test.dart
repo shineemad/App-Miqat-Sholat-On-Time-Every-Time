@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:sholat_qibla/data/cities/city_repository.dart';
-import 'package:sholat_qibla/engine/models/lat_lng.dart';
+import 'package:mu_qibla/data/cities/city_repository.dart';
+import 'package:mu_qibla/engine/models/lat_lng.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

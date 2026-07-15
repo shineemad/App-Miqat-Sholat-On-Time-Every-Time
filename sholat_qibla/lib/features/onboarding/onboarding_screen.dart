@@ -208,7 +208,7 @@ class _WelcomeStep extends StatelessWidget {
         ),
         const SizedBox(height: 24),
         Text(
-          'Miqat',
+          'MU-Qibla',
           style: AppTypography.textTheme.displaySmall,
           textAlign: TextAlign.center,
         ),

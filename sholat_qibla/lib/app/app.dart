@@ -6,15 +6,15 @@ import '../l10n/app_localizations.dart';
 import 'app_router.dart';
 import 'injection.dart';
 
-/// Widget root aplikasi Miqat.
-class MiqatApp extends StatefulWidget {
-  const MiqatApp({super.key});
+/// Widget root aplikasi MU-Qibla.
+class MuQiblaApp extends StatefulWidget {
+  const MuQiblaApp({super.key});
 
   @override
-  State<MiqatApp> createState() => _MiqatAppState();
+  State<MuQiblaApp> createState() => _MuQiblaAppState();
 }
 
-class _MiqatAppState extends State<MiqatApp> with WidgetsBindingObserver {
+class _MuQiblaAppState extends State<MuQiblaApp> with WidgetsBindingObserver {
   late final ThemeController _theme = sl<ThemeController>();
 
   @override
@@ -40,7 +40,7 @@ class _MiqatAppState extends State<MiqatApp> with WidgetsBindingObserver {
     return ListenableBuilder(
       listenable: _theme,
       builder: (context, _) => MaterialApp(
-        title: 'Miqat',
+        title: 'MU-Qibla',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.light,
         darkTheme: AppTheme.dark,

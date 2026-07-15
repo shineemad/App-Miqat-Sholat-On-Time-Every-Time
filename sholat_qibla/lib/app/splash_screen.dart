@@ -8,7 +8,7 @@ import 'injection.dart';
 
 /// Layar pembuka (splash) beranimasi saat aplikasi dibuka.
 ///
-/// Menampilkan logo Miqat dengan animasi masuk, lalu berpindah otomatis
+/// Menampilkan logo MU-Qibla dengan animasi masuk, lalu berpindah otomatis
 /// ke Onboarding (bila first-run) atau Beranda.
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -106,7 +106,7 @@ class _SplashScreenState extends State<SplashScreen>
                 position: _textSlide,
                 child: Column(
                   children: [
-                    Text('Miqat',
+                    Text('MU-Qibla',
                         style: AppTypography.textTheme.displaySmall),
                     const SizedBox(height: 4),
                     Text(

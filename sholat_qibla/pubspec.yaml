@@ -1,5 +1,5 @@
-name: sholat_qibla
-description: "Miqat — Sholat On Time, Every Time. Jadwal sholat & arah kiblat offline-first."
+name: mu_qibla
+description: "MU-Qibla — Sholat On Time, Every Time. Jadwal sholat & arah kiblat offline-first."
 publish_to: 'none'
 version: 1.0.0+1
 
@@ -33,26 +33,26 @@ dev_dependencies:
 
 # Konfigurasi ikon peluncur (jalankan: dart run flutter_launcher_icons)
 flutter_launcher_icons:
-  image_path: "assets/logo/miqat_icon.png"
+  image_path: "assets/logo/mu_qibla_icon.png"
   android: "ic_launcher"
   min_sdk_android: 21
   adaptive_icon_background: "#FF5A3C"
-  adaptive_icon_foreground: "assets/logo/miqat_foreground.png"
+  adaptive_icon_foreground: "assets/logo/mu_qibla_foreground.png"
   ios: true
-  image_path_ios: "assets/logo/miqat_ios.png"
+  image_path_ios: "assets/logo/mu_qibla_ios.png"
   remove_alpha_ios: true
   web:
     generate: true
-    image_path: "assets/logo/miqat_icon.png"
+    image_path: "assets/logo/mu_qibla_icon.png"
     background_color: "#FCF9F8"
     theme_color: "#FF5A3C"
 
 # Konfigurasi splash native (jalankan: dart run flutter_native_splash:create)
 flutter_native_splash:
   color: "#FCF9F8"
-  image: "assets/logo/miqat_icon.png"
+  image: "assets/logo/mu_qibla_icon.png"
   android_12:
-    image: "assets/logo/miqat_foreground.png"
+    image: "assets/logo/mu_qibla_foreground.png"
     color: "#FF5A3C"
   web: true
 

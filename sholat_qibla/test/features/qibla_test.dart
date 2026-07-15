@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:sholat_qibla/core/utils/compass_utils.dart';
-import 'package:sholat_qibla/engine/models/lat_lng.dart';
-import 'package:sholat_qibla/features/qibla/qibla_calculator.dart';
-import 'package:sholat_qibla/features/qibla/qibla_compass_service.dart';
+import 'package:mu_qibla/core/utils/compass_utils.dart';
+import 'package:mu_qibla/engine/models/lat_lng.dart';
+import 'package:mu_qibla/features/qibla/qibla_calculator.dart';
+import 'package:mu_qibla/features/qibla/qibla_compass_service.dart';
 
 void main() {
   group('QiblaCalculator - sudut kiblat (true north)', () {

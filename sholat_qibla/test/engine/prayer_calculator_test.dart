@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:sholat_qibla/engine/models/calculation_method.dart';
-import 'package:sholat_qibla/engine/models/lat_lng.dart';
-import 'package:sholat_qibla/engine/models/madhab.dart';
-import 'package:sholat_qibla/engine/models/prayer_times.dart';
-import 'package:sholat_qibla/engine/prayer_calculator.dart';
+import 'package:mu_qibla/engine/models/calculation_method.dart';
+import 'package:mu_qibla/engine/models/lat_lng.dart';
+import 'package:mu_qibla/engine/models/madhab.dart';
+import 'package:mu_qibla/engine/models/prayer_times.dart';
+import 'package:mu_qibla/engine/prayer_calculator.dart';
 
 void main() {
   // Lokasi uji: Jakarta (WIB, UTC+7).

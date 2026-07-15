@@ -7,6 +7,14 @@ enum CalculationMethod {
   /// Kementerian Agama Republik Indonesia.
   kemenag(fajrAngle: 20.0, ishaAngle: 18.0, label: 'Kemenag RI'),
 
+  /// Muhammadiyah — sama dengan Kemenag RI + ihtiyati 8 menit.
+  muhammadiyah(
+    fajrAngle: 20.0,
+    ishaAngle: 18.0,
+    label: 'Muhammadiyah',
+    offsetMinutes: 8,
+  ),
+
   /// Muslim World League.
   mwl(fajrAngle: 18.0, ishaAngle: 17.0, label: 'Muslim World League'),
 
@@ -32,6 +40,7 @@ enum CalculationMethod {
     required this.ishaAngle,
     required this.label,
     this.ishaIntervalMinutes = 0,
+    this.offsetMinutes = 0,
   });
 
   /// Sudut matahari di bawah horizon untuk Subuh (derajat).
@@ -42,6 +51,9 @@ enum CalculationMethod {
 
   /// Interval menit setelah Maghrib (0 = pakai [ishaAngle]).
   final int ishaIntervalMinutes;
+
+  /// Offset ihtiyati dalam menit yang ditambahkan ke semua waktu sholat.
+  final int offsetMinutes;
 
   /// Nama tampilan metode.
   final String label;

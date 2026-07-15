@@ -63,6 +63,12 @@ class PrayerCalculator {
       times['isha'] = times['maghrib']! + method.ishaIntervalMinutes / 60.0;
     }
 
+    // Terapkan offset ihtiyati (menit) jika metode memilikinya.
+    if (method.offsetMinutes != 0) {
+      final offsetHours = method.offsetMinutes / 60.0;
+      times.updateAll((_, v) => v + offsetHours);
+    }
+
     final midnight = DateTime(date.year, date.month, date.day);
     DateTime toTime(double hours) =>
         midnight.add(Duration(milliseconds: (hours * 3600000).round()));

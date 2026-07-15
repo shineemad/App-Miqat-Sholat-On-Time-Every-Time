@@ -1,11 +1,11 @@
 {
-    "name": "Miqat",
-    "short_name": "Miqat",
+    "name": "MU-Qibla",
+    "short_name": "MU-Qibla",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#FCF9F8",
     "theme_color": "#FF5A3C",
-    "description": "Miqat — Sholat On Time, Every Time. Jadwal sholat & arah kiblat offline-first.",
+    "description": "MU-Qibla — Sholat On Time, Every Time. Jadwal sholat & arah kiblat offline-first.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

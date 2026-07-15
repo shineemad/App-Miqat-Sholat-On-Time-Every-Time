@@ -53,7 +53,7 @@ class AppLogger {
     _records.add(record);
     developer.log(
       message,
-      name: tag ?? 'Miqat',
+      name: tag ?? 'MU-Qibla',
       level: _severity(level),
       error: error,
       stackTrace: stackTrace,

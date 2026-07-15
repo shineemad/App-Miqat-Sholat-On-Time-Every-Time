@@ -1,4 +1,4 @@
-package com.sholatqibla.sholat_qibla
+package com.muqibla.mu_qibla
 
 import io.flutter.embedding.android.FlutterActivity
 

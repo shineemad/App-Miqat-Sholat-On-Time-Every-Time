@@ -1,10 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:sholat_qibla/engine/models/calculation_method.dart';
-import 'package:sholat_qibla/engine/models/lat_lng.dart';
-import 'package:sholat_qibla/engine/models/madhab.dart';
-import 'package:sholat_qibla/engine/models/prayer_times.dart';
-import 'package:sholat_qibla/notifications/models/notification_settings.dart';
-import 'package:sholat_qibla/notifications/prayer_notification_scheduler.dart';
+import 'package:mu_qibla/engine/models/calculation_method.dart';
+import 'package:mu_qibla/engine/models/lat_lng.dart';
+import 'package:mu_qibla/engine/models/madhab.dart';
+import 'package:mu_qibla/engine/models/prayer_times.dart';
+import 'package:mu_qibla/notifications/models/notification_settings.dart';
+import 'package:mu_qibla/notifications/prayer_notification_scheduler.dart';
 
 class _FakeGateway implements NotificationGateway {
   final List<ScheduledPrayerNotification> scheduled = [];

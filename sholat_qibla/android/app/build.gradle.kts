@@ -19,7 +19,7 @@ if (hasReleaseKeystore) {
 }
 
 android {
-    namespace = "com.sholatqibla.sholat_qibla"
+    namespace = "com.muqibla.mu_qibla"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -36,7 +36,7 @@ android {
 
     defaultConfig {
         // ID aplikasi unik (Play Store). Jangan diubah setelah rilis pertama.
-        applicationId = "com.sholatqibla.miqat"
+        applicationId = "com.muqibla.mu_qibla"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode

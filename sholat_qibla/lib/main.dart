@@ -9,7 +9,7 @@ import 'core/utils/app_logger.dart';
 import 'notifications/notification_service.dart';
 import 'notifications/schedule_refresher.dart';
 
-/// Titik masuk aplikasi Miqat.
+/// Titik masuk aplikasi MU-Qibla.
 ///
 /// Alur cold start (dioptimalkan agar UI tampil cepat):
 /// 1. Inisialisasi binding & dependency injection.
@@ -32,7 +32,7 @@ Future<void> main() async {
     return true;
   };
 
-  runApp(const MiqatApp());
+  runApp(const MuQiblaApp());
 
   // Setup notifikasi & widget setelah UI tampil (non-blocking).
   unawaited(_setupNotifications(logger));

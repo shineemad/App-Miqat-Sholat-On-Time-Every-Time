@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sholat_qibla/core/theme/app_theme.dart';
-import 'package:sholat_qibla/features/quran/quran_bookmark_repository.dart';
-import 'package:sholat_qibla/features/quran/quran_controller.dart';
-import 'package:sholat_qibla/features/quran/quran_repository.dart';
-import 'package:sholat_qibla/features/quran/quran_screen.dart';
-import 'package:sholat_qibla/features/quran/surah_screen.dart';
-import 'package:sholat_qibla/features/quran/widgets/surah_tile.dart';
+import 'package:mu_qibla/core/theme/app_theme.dart';
+import 'package:mu_qibla/features/quran/quran_bookmark_repository.dart';
+import 'package:mu_qibla/features/quran/quran_controller.dart';
+import 'package:mu_qibla/features/quran/quran_repository.dart';
+import 'package:mu_qibla/features/quran/quran_screen.dart';
+import 'package:mu_qibla/features/quran/surah_screen.dart';
+import 'package:mu_qibla/features/quran/widgets/surah_tile.dart';
 
 class _SyncBundle extends CachingAssetBundle {
   _SyncBundle(this._contents);

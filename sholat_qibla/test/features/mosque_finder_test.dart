@@ -5,15 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sholat_qibla/core/theme/app_theme.dart';
-import 'package:sholat_qibla/data/cities/city_repository.dart';
-import 'package:sholat_qibla/data/location/location_resolver.dart';
-import 'package:sholat_qibla/data/location/location_service.dart';
-import 'package:sholat_qibla/data/preferences/preferences_repository.dart';
-import 'package:sholat_qibla/engine/models/lat_lng.dart';
-import 'package:sholat_qibla/features/hub/mosque_finder_controller.dart';
-import 'package:sholat_qibla/features/hub/mosque_finder_screen.dart';
-import 'package:sholat_qibla/features/hub/mosque_finder_service.dart';
+import 'package:mu_qibla/core/theme/app_theme.dart';
+import 'package:mu_qibla/data/cities/city_repository.dart';
+import 'package:mu_qibla/data/location/location_resolver.dart';
+import 'package:mu_qibla/data/location/location_service.dart';
+import 'package:mu_qibla/data/preferences/preferences_repository.dart';
+import 'package:mu_qibla/engine/models/lat_lng.dart';
+import 'package:mu_qibla/features/hub/mosque_finder_controller.dart';
+import 'package:mu_qibla/features/hub/mosque_finder_screen.dart';
+import 'package:mu_qibla/features/hub/mosque_finder_service.dart';
 
 class _SyncBundle extends CachingAssetBundle {
   _SyncBundle(this._contents);
