@@ -33,14 +33,16 @@ jobs:
 
       - name: Install dependencies
         run: |
+          cd sholat_qibla
           flutter pub get
 
       - name: Build debug APK
         run: |
+          cd sholat_qibla
           flutter build apk --debug
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: app-debug-apk
-          path: build/app/outputs/flutter-apk/app-debug.apk
+          path: sholat_qibla/build/app/outputs/flutter-apk/app-debug.apk
