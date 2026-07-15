@@ -32,14 +32,12 @@ jobs:
           fi
 
       - name: Install dependencies
-        run: |
-          cd sholat_qibla
-          flutter pub get
+        working-directory: sholat_qibla
+        run: flutter pub get
 
       - name: Build debug APK
-        run: |
-          cd sholat_qibla
-          flutter build apk --debug
+        working-directory: sholat_qibla
+        run: flutter build apk --debug
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
